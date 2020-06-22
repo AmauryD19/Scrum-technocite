@@ -14,7 +14,6 @@ namespace ScrumLearning
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("Write your calculation");
             string tempMath = Console.ReadLine();
-            //string value = new DataTable().Compute(math, null).ToString();
             if (tempMath.Contains("."))
             {
                 Console.WriteLine("Decimal numbers must use a \",\"");
@@ -25,9 +24,21 @@ namespace ScrumLearning
 
                 if (finalMath.Contains("^"))
                 {
-                    string value = new DataTable().Compute(finalMath, null).ToString();
-                    Console.WriteLine("{0} = {1}", tempMath, value);
+                    //string baseNumber = finalMath.Substring(0, finalMath.IndexOf('^'));
+                    //double baseNum = double.Parse(baseNumber);
+                    //double power = double.Parse(finalMath.Substring(finalMath.IndexOf('^'), finalMath.Length - 1));
 
+                    //double pow = Math.Pow(baseNumber, power);
+                    //Console.WriteLine(pow);
+                    Console.WriteLine(finalMath.IndexOf('^'));
+                }
+                else if (finalMath.Contains("Cos"))
+                {
+                    Console.WriteLine("Cos");
+                }
+                else if (finalMath.Contains("Sin"))
+                {
+                    Console.WriteLine("Sin");
                 }
                 else
                 {
@@ -36,14 +47,7 @@ namespace ScrumLearning
                     Console.WriteLine("{0} = {1}", tempMath, value);
                 }
             }
-
-
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
-            //double pow_t = Math.Pow((10 * 2), 2); 
-            //double pow_tt = Math.Pow(20,2);
-            //Console.WriteLine(pow_t);
-            //Console.WriteLine(pow_tt);
-            //Console.WriteLine("{0} = {1}", math, value);
         }
 
     }
