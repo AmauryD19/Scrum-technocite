@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ScrumLearning
+﻿namespace ScrumLearning
 {
     public static class Constants
     {
+        // All the Constants used inside the different menus
         public const string NEW_OPINION_ITEM = "Nouvel avis sur un film";
+
         public const string CONSULT_DELETE_OPINION_ITEM = "Consulter et/ou supprimer un avis";
         public const string SAVE_QUIT_ITEM = "Sauver et quitter";
         public const string CALCULATOR_ITEM = "Calculatrice";

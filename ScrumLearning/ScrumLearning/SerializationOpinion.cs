@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace ScrumLearning
 {
-    class SerializationOpinion
+    internal class SerializationOpinion
     {
-        public SerializationOpinion() { }
+        public SerializationOpinion()
+        {
+        }
 
+        /// <summary>
+        /// Prompts the user to add a new opinion to the already existing ones.
+        /// </summary>
         public static void AddOpinion()
         {
-            if (!File.Exists("opinions.xml"))
+            if (!File.Exists("opinions.xml")) // If no file, create a new one
             {
                 StreamWriter sw = File.CreateText("opinions.xml");
                 sw.WriteLine(@"<?xml version=""1.0"" encoding=""utf-8""?>");
@@ -30,7 +33,7 @@ namespace ScrumLearning
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<Opinion>), xRoot);
             StreamReader reader = new StreamReader("opinions.xml");
-            List<Opinion> opinions = (List<Opinion>)serializer.Deserialize(reader);
+            List<Opinion> opinions = (List<Opinion>)serializer.Deserialize(reader); // Get the already existing opinions
             reader.Close();
 
             Console.WriteLine("------------------------------------");
@@ -68,18 +71,17 @@ namespace ScrumLearning
                 {
                     Console.WriteLine("Les caractères entrés ne correspondent pas à une note (de 0 à 10).");
                 }
-            } while (note > 10 || note < 0);
+            } while (note > 10 || note < 0); // Note needs to be between 0 and 10
 
-            string critic; // Contains the previous entry if it is wrong
+            string critic;
             do
             {
                 Console.WriteLine("------------------------------------");
                 Console.WriteLine("Veuillez entrer un commentaire sur la critique : ");
                 critic = Console.ReadLine();
-            } while (critic.Length < 100 || critic.Length > 1000);
+            } while (critic.Length < 100 || critic.Length > 1000); // Needs to have between 100 and 1000 characters
 
             opinions.Add(new Opinion() { Title = title, Year = year, Director = director, Note = note, Critic = critic });
-
 
             Write(serializer, opinions);
         }
@@ -108,12 +110,12 @@ namespace ScrumLearning
                     Console.WriteLine("Quel est l'avis que vous souhaitez afficher ?");
                     foreach (var opinion in opinions)
                     {
-                        Console.WriteLine($"{opinions.IndexOf(opinion) + 1}. {opinion.Title}, {opinion.Year}");
+                        Console.WriteLine($"{opinions.IndexOf(opinion) + 1}. {opinion.Title}, {opinion.Year}"); // Shows the index, followed by the title and the year
                     }
 
                     int.TryParse(Console.ReadLine(), out int nbOpinion);
 
-                    while (nbOpinion <= 0 || nbOpinion > opinions.Count)
+                    while (nbOpinion <= 0 || nbOpinion > opinions.Count) // The number entered needs to be between 1 and the maximum possible for an index
                     {
                         Console.WriteLine("Quel est l'avis que vous souhaitez afficher ?");
                         int.TryParse(Console.ReadLine(), out nbOpinion);
@@ -126,15 +128,14 @@ namespace ScrumLearning
                     Console.WriteLine($"Note : {opinions.ElementAt(nbOpinion - 1).Note}/10");
                     Console.WriteLine($"Critique : {opinions.ElementAt(nbOpinion - 1).Critic}");
                     Console.WriteLine("---------------------------------------");
-                    Menu menu = new Menu(new List<string> { Constants.LIST_MOVIES_ITEM, Constants.DELETE_MOVIE_ITEM, Constants.MAIN_MENU_ITEM });
-                    menu.ShowMenu(MenuType.ConsultOpinion, false, nbOpinion-1);
+                    Menu menu = new Menu(new List<string> { Constants.LIST_MOVIES_ITEM, Constants.DELETE_MOVIE_ITEM, Constants.MAIN_MENU_ITEM }); // Creates a new menu
+                    menu.ShowMenu(MenuType.ConsultOpinion, false, nbOpinion - 1);
                 }
                 else
                 {
                     Console.WriteLine("Il n'y a aucun avis à afficher.");
                     Console.ReadKey();
                 }
-
             }
         }
 
@@ -171,8 +172,8 @@ namespace ScrumLearning
                 opinions.RemoveAt(index);
                 Write(serializer, opinions);
 
-                Menu menu = new Menu(new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM });
-                menu.ShowMenu(MenuType.MainMenu, true, 0);
+                // Shows the basic menu to the user
+                Program.MainMenu();
             }
         }
     }

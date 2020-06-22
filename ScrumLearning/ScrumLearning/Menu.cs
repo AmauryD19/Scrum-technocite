@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 public enum MenuType { MainMenu, ConsultOpinion }
 
 namespace ScrumLearning
 {
-    class Menu
+    internal class Menu
     {
-
         public List<string> Items { get; set; }
 
         public Menu(List<string> items)
         {
             Items = items;
-
         }
 
         public void ShowMenu(MenuType menuType, bool clearConsole, int max)
@@ -43,7 +36,6 @@ namespace ScrumLearning
                     Console.WriteLine("La valeur entrée n'est pas un chiffre.");
                 }
             } while (action <= 1 || action > Items.Count);
-
         }
 
         public void GetKey(int action, MenuType menuType, int max)
@@ -56,8 +48,10 @@ namespace ScrumLearning
                     case 2: SerializationOpinion.ShowOpinion(); ShowMenu(MenuType.MainMenu, true, 0); break;
                     case 3: /*BXL_METEO */; ShowMenu(MenuType.MainMenu, true, 0); break;
                     case 4: /* CALCULATOR */; ShowMenu(MenuType.MainMenu, true, 0); break;
-                    case 5: Environment.Exit(0);
+                    case 5:
+                        Environment.Exit(0);
                         break;
+
                     default: break;
                 }
             }
@@ -69,19 +63,19 @@ namespace ScrumLearning
                         Console.Clear();
                         SerializationOpinion.ShowOpinion();
                         break;
+
                     case 2:
                         SerializationOpinion.DeleteOpinion(max);
                         break;
+
                     case 3:
                         Items = new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM };
                         ShowMenu(MenuType.MainMenu, true, max);
                         break;
-                    default: break;
 
+                    default: break;
                 }
             }
         }
-
     }
-
 }

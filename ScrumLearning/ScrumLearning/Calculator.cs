@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScrumLearning
 {
-    class Calculator
+    internal class Calculator
     {
         public static void CalculatorMethod()
         {
@@ -49,6 +45,5 @@ namespace ScrumLearning
             }
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
         }
-
     }
 }
