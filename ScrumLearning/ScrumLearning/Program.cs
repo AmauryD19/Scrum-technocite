@@ -10,7 +10,7 @@ namespace ScrumLearning
     {
         static void Main(string[] args)
         {
-            //Test
+            SerializationOpinion.Serialize();
         }
     }
 }
