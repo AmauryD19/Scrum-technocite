@@ -131,7 +131,7 @@ namespace ScrumLearning
                     Console.WriteLine($"Note : {opinions.ElementAt(nbOpinion - 1).Note}/10");
                     Console.WriteLine($"Critique : {opinions.ElementAt(nbOpinion - 1).Critic}");
                     Console.WriteLine("---------------------------------------");
-                    Menu menu = new Menu(new List<string> { Constants.LIST_MOVIES_ITEM, Constants.DELETE_MOVIE_ITEM, Constants.MAIN_MENU_ITEM }); // Creates a new menu
+                    Menu menu = new Menu(new List<string> { Constants.LIST_MOVIES_ITEM, Constants.DELETE_MOVIE_ITEM, Constants.MAIN_MENU_ITEM }, MenuType.ConsultOpinion); // Creates a new menu
                     menu.ShowMenu(MenuType.ConsultOpinion, false, nbOpinion - 1);
                 }
                 else

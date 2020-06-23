@@ -9,6 +9,8 @@ namespace ScrumLearning
     public class Admin
     {
         public static bool isConnected = false;
+        public static ConsoleColor Color = ConsoleColor.Black;
+        public static ConsoleColor Colortxt = ConsoleColor.White;
 
         public static void CreateAdmin()
         {
@@ -185,6 +187,7 @@ namespace ScrumLearning
             {
                 return true;
             }
-        }
+            
+        }  
     }
 }
