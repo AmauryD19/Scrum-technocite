@@ -14,8 +14,12 @@ namespace ScrumLearning
         /// </summary>
         public static void MainMenu()
         {
-            Menu menu = new Menu(new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM, Admin.MenuAdmin() });
+            List<string> list = new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM, Admin.MenuAdmin() };
+           
+            Menu menu = new Menu(list,MenuType.MainMenu);
+
             menu.ShowMenu(MenuType.MainMenu, true, 0);
+            
             //D@ssonville123456
         }
     }

@@ -15,5 +15,7 @@
         public const string SIGN_UP_ADMIN_ITEM = "S'enregistrer en tant qu'administrateur";
         public const string SIGN_IN_ADMIN_ITEM = "Se connecter en tant qu'administrateur";
         public const string LOG_OUT_ADMIN_ITEM = "Se déconnecter de l'administrateur";
+        public const string CHANGE_COLORBG_ITEM = "Changer la couleur de fond";
+        public const string CHANGE_COLORTXT_ITEM = "Changer la couleur du texte";
     }
 }
