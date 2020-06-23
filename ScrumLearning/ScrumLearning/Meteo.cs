@@ -17,7 +17,7 @@ namespace ScrumLearning
         {
             
             try
-            {
+            { 
                 HttpResponseMessage response = await client.GetAsync(URL);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -25,7 +25,8 @@ namespace ScrumLearning
                 var webclient = new WebClient();
                 string resultat = webclient.DownloadString(URL);
                 DeseJson desejson = JsonConvert.DeserializeObject<DeseJson>(resultat);
-                Console.WriteLine("la température aujourd'hui a Bruxelles est de : " + desejson.current.temperature);
+                
+                Console.WriteLine("la température aujourd'hui a Bruxelles est de : " + desejson.current.temperature + "°C.");
             }
             catch (HttpRequestException e)
             {
