@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="DeseJson.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Opinion.cs" />
     <Compile Include="Calculator.cs" />
