@@ -33,7 +33,7 @@ namespace ScrumLearning
                 ["-"] = new Operator { Name = "-", Priority = 1 },
                 ["*"] = new Operator { Name = "*", Priority = 2 },
                 ["/"] = new Operator { Name = "/", Priority = 2 },
-                ["^"] = new Operator { Name = "/", Priority = 3, RightAssociative = true }
+                ["^"] = new Operator { Name = "^", Priority = 3, RightAssociative = true }
             };
 
             private bool CompareOperators(Operator op1, Operator op2)

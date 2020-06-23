@@ -78,6 +78,9 @@ namespace ScrumLearning
             {
                 Console.WriteLine("------------------------------------");
                 Console.WriteLine("Veuillez entrer un commentaire sur la critique : ");
+                int buffSize = 1002;
+                Stream inStream = Console.OpenStandardInput(buffSize);
+                Console.SetIn(new StreamReader(inStream, Console.InputEncoding, false, buffSize));
                 critic = Console.ReadLine();
             } while (critic.Length < 100 || critic.Length > 1000); // Needs to have between 100 and 1000 characters
 
