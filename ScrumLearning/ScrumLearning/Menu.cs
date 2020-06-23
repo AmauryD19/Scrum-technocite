@@ -53,7 +53,7 @@ namespace ScrumLearning
                     case 1: SerializationOpinion.AddOpinion(); ShowMenu(MenuType.MainMenu, true, 0); break;
                     case 2: SerializationOpinion.ShowOpinion(); ShowMenu(MenuType.MainMenu, true, 0); break;
                     case 3: /*BXL_METEO */; ShowMenu(MenuType.MainMenu, true, 0); break;
-                    case 4: /* CALCULATOR */; ShowMenu(MenuType.MainMenu, true, 0); break;
+                    case 4: Calculator.CalculatorMethod(); ShowMenu(MenuType.MainMenu, true, 0); break;
                     case 5:
                         Environment.Exit(0);
                         break;
