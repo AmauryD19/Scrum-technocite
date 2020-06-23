@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScrumLearning
 {
-    class DisplayPuissance4
+    internal class DisplayPuissance4
     {
         public static int PlayerChoice(char[,] board, PlayerPuissance4 activePlayer)
         {
@@ -50,7 +46,6 @@ namespace ScrumLearning
             return player2;
         }
 
-
         public static void PlayerWin(PlayerPuissance4 actualPlayer)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -88,7 +83,6 @@ namespace ScrumLearning
                 Console.Write("| \n");
             }
             Console.Write(" 1234567");
-
         }
     }
 }

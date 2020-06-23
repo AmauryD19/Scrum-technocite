@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScrumLearning
 {
-    class BoardPuissance4
+    internal class BoardPuissance4
     {
-        char[,] board = new char[8, 10];
-        int choice, win;
-        int myRow, turn = 0;
+        private char[,] board = new char[8, 10];
+        private int choice, win;
+        private int myRow, turn = 0;
+
         public BoardPuissance4(PlayerPuissance4 player1, PlayerPuissance4 player2)
         {
             Console.Clear();
@@ -46,7 +44,7 @@ namespace ScrumLearning
                 }
             }
             Console.WriteLine("Egalité !!");
-           men.ShowMenu(MenuType.MainMenu, true, 0);
+            men.ShowMenu(MenuType.MainMenu, true, 0);
         }
 
         public int BoardPos(PlayerPuissance4 player, int choice)

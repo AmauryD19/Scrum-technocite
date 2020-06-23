@@ -79,6 +79,7 @@ namespace ScrumLearning
                         RefreshItemsMainMenu();
                         ShowMenu(MenuType.MainMenu, true, 0);
                         break;
+
                     case 7:
                         PuissanceFour.Play();
                         ShowMenu(MenuType.MainMenu, true, 0);

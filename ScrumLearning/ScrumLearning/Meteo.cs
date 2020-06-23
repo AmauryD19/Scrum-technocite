@@ -25,7 +25,7 @@ namespace ScrumLearning
                 var webclient = new WebClient();
                 string resultat = webclient.DownloadString(URL + city);
                 DeseJson desejson = JsonConvert.DeserializeObject<DeseJson>(resultat);
-                Console.WriteLine("la température aujourd'hui a "+city+" est de : " + desejson.current.temperature + "°C.");
+                Console.WriteLine("la température aujourd'hui a " + city + " est de : " + desejson.current.temperature + "°C.");
                 Console.ReadKey();
             }
             catch (HttpRequestException e)
