@@ -12,13 +12,31 @@ namespace ScrumLearning
         public static void CalculatorMethod()
         {
             Console.WriteLine("Veuillez entrer votre calcul");
-            string text = Console.ReadLine();
-            decimal result = CalculateRPN(CalculatorStringParser.Parse(text).ToString());
+            string text = string.Empty;
+            bool isOk = false;
+            decimal result = decimal.Zero;
+            do
+            {
+                try
+                {
+
+                    text = Console.ReadLine();
+                    result = CalculateRPN(CalculatorStringParser.Parse(text).ToString());
+                    isOk = true;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Cette opération n'est pas valide.");
+                }
+            } while (!isOk);
             Console.WriteLine("------------------------------------");
             Console.WriteLine("{0} = {1}", text, result);
             string q = string.Empty;
-            do 
+            do
             {
+
+                Console.WriteLine("------------------------------------");
+                Console.WriteLine("Entrez Q ou q pour quitter le module.");
                 q = Console.ReadLine();
             } while (q.ToUpper() != "Q");
         }
@@ -27,11 +45,9 @@ namespace ScrumLearning
         {
             string[] rpnTokens = rpn.Split(' ');
             Stack<decimal> stack = new Stack<decimal>();
-            decimal number = decimal.Zero;
-            
             foreach (string token in rpnTokens)
             {
-                if (decimal.TryParse(token, out number))
+                if (decimal.TryParse(token, out decimal number))
                 {
                     stack.Push(number);
                 }
@@ -85,18 +101,6 @@ namespace ScrumLearning
                 }
             }
             return stack.Pop();
-        }
-
-        static void PrintState(Stack<decimal> stack)
-        {
-            decimal[] arr = stack.ToArray();
-
-            for (int i = arr.Length - 1; i >= 0; i--)
-            {
-                Console.Write("{0,-8:F3}", arr[i]);
-            }
-
-            Console.WriteLine();
         }
     }
 
