@@ -54,6 +54,7 @@
     <Compile Include="CalculatorParser.cs" />
     <Compile Include="CalculatorStringParser.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="DeseJson.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Operator.cs" />
     <Compile Include="Opinion.cs" />
