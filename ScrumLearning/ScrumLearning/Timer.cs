@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScrumLearning
 {
-    class Timer
+    internal class Timer
     {
         public static void TimerMethod()
         {
@@ -23,11 +19,10 @@ namespace ScrumLearning
                 catch (Exception)
                 {
                     Console.WriteLine("Les caractères entrés ne correspondent pas à entier positif.");
-
                 }
             }
             while (timer <= 0);
-            
+
             var cursorTop = Console.CursorTop;
             for (int a = timer; a >= 0; a--)
             {

@@ -4,7 +4,6 @@ using System.IO;
 
 public enum MenuType { MainMenu, ConsultOpinion }
 
-
 namespace ScrumLearning
 {
     internal class Menu
@@ -18,19 +17,16 @@ namespace ScrumLearning
             {
                 RefreshItemsMainMenu();
             }
-            
         }
-        
 
         public void RefreshItemsMainMenu()
         {
-
             Items = new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM, Admin.MenuAdmin(), Constants.PUISSANCE_4_ITEM, Constants.TIMER_ITEM };
             if (Admin.isConnected)
             {
                 Items.Add(Constants.CHANGE_COLORBG_ITEM);
                 Items.Add(Constants.CHANGE_COLORTXT_ITEM);
-            }        
+            }
         }
 
         public void ShowMenu(MenuType menuType, bool clearConsole, int max)
@@ -42,7 +38,7 @@ namespace ScrumLearning
                 Console.ForegroundColor = Admin.Colortxt;
                 Console.Clear();
             }
-            else 
+            else
             {
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
@@ -67,22 +63,22 @@ namespace ScrumLearning
                 }
             } while (action <= 1 || action > Items.Count);
         }
+
         public void ChangeColor()
         {
-            
             Console.WriteLine("Veuillez entrer la couleur de fond souhaitée :");
             string USColor = Console.ReadLine();
-            if(USColor != Admin.Color.ToString())
+            if (USColor != Admin.Color.ToString())
             {
                 ConsoleColor col;
-                if(Enum.TryParse(USColor,true,out col))
+                if (Enum.TryParse(USColor, true, out col))
                 {
                     Console.BackgroundColor = col;
                     Admin.Color = col;
                 }
-                
             }
         }
+
         public void ChangeColorTXT()
         {
             Console.WriteLine("Veuillez entrer la couleur de texte souhaitée :");
@@ -97,6 +93,7 @@ namespace ScrumLearning
                 }
             }
         }
+
         public void GetKey(int action, MenuType menuType, int max)
         {
             if (menuType == MenuType.MainMenu)
@@ -131,20 +128,27 @@ namespace ScrumLearning
                         RefreshItemsMainMenu();
                         ShowMenu(MenuType.MainMenu, true, 0);
                         break;
-                    case 7: PuissanceFour.Play();
+
+                    case 7:
+                        PuissanceFour.Play();
                         ShowMenu(MenuType.MainMenu, true, 0);
                         break;
-                    case 8: Timer.TimerMethod();
+
+                    case 8:
+                        Timer.TimerMethod();
                         ShowMenu(MenuType.MainMenu, true, 0);
-                        break; 
+                        break;
+
                     case 9:
                         ChangeColor();
                         ShowMenu(MenuType.MainMenu, true, 0);
                         break;
+
                     case 10:
                         ChangeColorTXT();
                         ShowMenu(MenuType.MainMenu, true, 0);
                         break;
+
                     default: break;
                 }
             }

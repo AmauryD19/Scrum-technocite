@@ -187,7 +187,6 @@ namespace ScrumLearning
             {
                 return true;
             }
-            
-        }  
+        }
     }
 }
