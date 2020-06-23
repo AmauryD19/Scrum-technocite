@@ -44,8 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculatorParser.cs" />
+    <Compile Include="CalculatorStringParser.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="Operator.cs" />
     <Compile Include="Opinion.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Program.cs" />

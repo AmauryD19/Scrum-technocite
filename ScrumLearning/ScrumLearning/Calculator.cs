@@ -7,48 +7,97 @@ using System.Threading.Tasks;
 
 namespace ScrumLearning
 {
-    class Calculator
+    public class Calculator
     {
         public static void CalculatorMethod()
         {
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("Write your calculation");
-            string tempMath = Console.ReadLine();
-            if (tempMath.Contains("."))
+            Console.WriteLine("Veuillez entrer votre calcul");
+            string text = Console.ReadLine();
+            decimal result = CalculateRPN(CalculatorStringParser.Parse(text).ToString());
+            Console.WriteLine("------------------------------------");
+            Console.WriteLine("{0} = {1}", text, result);
+            string q = string.Empty;
+            do 
             {
-                Console.WriteLine("Decimal numbers must use a \",\"");
-            }
-            else
+                q = Console.ReadLine();
+            } while (q.ToUpper() != "Q");
+        }
+
+        static decimal CalculateRPN(string rpn)
+        {
+            string[] rpnTokens = rpn.Split(' ');
+            Stack<decimal> stack = new Stack<decimal>();
+            decimal number = decimal.Zero;
+            
+            foreach (string token in rpnTokens)
             {
-                string finalMath = tempMath.Replace(",", ".");
-
-                if (finalMath.Contains("^"))
+                if (decimal.TryParse(token, out number))
                 {
-                    //string baseNumber = finalMath.Substring(0, finalMath.IndexOf('^'));
-                    //double baseNum = double.Parse(baseNumber);
-                    //double power = double.Parse(finalMath.Substring(finalMath.IndexOf('^'), finalMath.Length - 1));
-
-                    //double pow = Math.Pow(baseNumber, power);
-                    //Console.WriteLine(pow);
-                    Console.WriteLine(finalMath.IndexOf('^'));
-                }
-                else if (finalMath.Contains("Cos"))
-                {
-                    Console.WriteLine("Cos");
-                }
-                else if (finalMath.Contains("Sin"))
-                {
-                    Console.WriteLine("Sin");
+                    stack.Push(number);
                 }
                 else
                 {
-                    string value = new DataTable().Compute(finalMath, null).ToString();
-                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("{0} = {1}", tempMath, value);
+                    switch (token)
+                    {
+                        case "^":
+                        case "pow":
+                            {
+                                number = stack.Pop();
+                                stack.Push((decimal)Math.Pow((double)stack.Pop(), (double)number));
+                                break;
+                            }
+                        case "ln":
+                            {
+                                stack.Push((decimal)Math.Log((double)stack.Pop(), Math.E));
+                                break;
+                            }
+                        case "sqrt":
+                            {
+                                stack.Push((decimal)Math.Sqrt((double)stack.Pop()));
+                                break;
+                            }
+                        case "*":
+                            {
+                                stack.Push(stack.Pop() * stack.Pop());
+                                break;
+                            }
+                        case "/":
+                            {
+                                number = stack.Pop();
+                                stack.Push(stack.Pop() / number);
+                                break;
+                            }
+                        case "+":
+                            {
+                                stack.Push(stack.Pop() + stack.Pop());
+                                break;
+                            }
+                        case "-":
+                            {
+                                number = stack.Pop();
+                                stack.Push(stack.Pop() - number);
+                                break;
+                            }
+                        default:
+                            Console.WriteLine("Erreur dans la méthode CalculateRPN(string).");
+                            break;
+                    }
                 }
             }
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+            return stack.Pop();
         }
 
+        static void PrintState(Stack<decimal> stack)
+        {
+            decimal[] arr = stack.ToArray();
+
+            for (int i = arr.Length - 1; i >= 0; i--)
+            {
+                Console.Write("{0,-8:F3}", arr[i]);
+            }
+
+            Console.WriteLine();
+        }
     }
+
 }
