@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScrumLearning
 {
@@ -19,7 +15,6 @@ namespace ScrumLearning
             {
                 try
                 {
-
                     text = Console.ReadLine();
                     result = CalculateRPN(CalculatorStringParser.Parse(text).ToString());
                     isOk = true;
@@ -34,14 +29,13 @@ namespace ScrumLearning
             string q = string.Empty;
             do
             {
-
                 Console.WriteLine("------------------------------------");
                 Console.WriteLine("Entrez Q ou q pour quitter le module.");
                 q = Console.ReadLine();
             } while (q.ToUpper() != "Q");
         }
 
-        static decimal CalculateRPN(string rpn)
+        private static decimal CalculateRPN(string rpn)
         {
             string[] rpnTokens = rpn.Split(' ');
             Stack<decimal> stack = new Stack<decimal>();
@@ -103,5 +97,4 @@ namespace ScrumLearning
             return stack.Pop();
         }
     }
-
 }

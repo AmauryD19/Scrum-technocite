@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Authentication.ExtendedProtection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ScrumLearning
 {
     public class CalculatorParser
     {
-        enum TokenType { Number, Variable, Function, Parenthesis, Operator, Comma, WhiteSpace };
+        private enum TokenType
+        { Number, Variable, Function, Parenthesis, Operator, Comma, WhiteSpace };
 
-        struct Token
+        private struct Token
         {
             public TokenType Type { get; }
             public string Value { get; }
+
             public override string ToString() => $"{Type}: {Value}";
 
             public Token(TokenType type, string value)
@@ -25,71 +25,72 @@ namespace ScrumLearning
             }
         }
 
-        class Parser { 
-        private IDictionary<string, Operator> operators = new Dictionary<string, Operator>
+        private class Parser
         {
-            ["+"] = new Operator { Name = "+", Priority = 1 },
-            ["-"] = new Operator { Name = "-", Priority = 1 },
-            ["*"] = new Operator { Name = "*", Priority = 2 },
-            ["/"] = new Operator { Name = "/", Priority = 2 },
-            ["^"] = new Operator { Name = "/", Priority = 3, RightAssociative = true }
-        };
-
-        private bool CompareOperators(Operator op1, Operator op2)
-        {
-            return op1.RightAssociative ? op1.Priority < op2.Priority : op1.Priority <= op2.Priority;
-        }
-
-        private bool CompareOperators(string op1, string op2) => CompareOperators(operators[op1], operators[op2]);
-
-        private TokenType DetermineType(char ch)
-        {
-            if (char.IsLetter(ch))
-                return TokenType.Variable;
-            if (char.IsDigit(ch))
-                return TokenType.Number;
-            if (char.IsWhiteSpace(ch))
-                return TokenType.WhiteSpace;
-            if (ch == ',')
-                return TokenType.Comma;
-            if (ch == '(' || ch == ')')
-                return TokenType.Parenthesis;
-            if (operators.ContainsKey(Convert.ToString(ch)))
-                return TokenType.Operator;
-
-            throw new Exception("Wrong character");
-        }
-
-        public IEnumerable<Token> Tokenize(TextReader reader)
-        {
-            var token = new StringBuilder();
-
-            int current;
-            while ((current = reader.Read()) != -1)
+            private IDictionary<string, Operator> operators = new Dictionary<string, Operator>
             {
-                var ch = (char)current;
-                var currentType = DetermineType(ch);
-                if (currentType == TokenType.WhiteSpace)
-                    continue;
+                ["+"] = new Operator { Name = "+", Priority = 1 },
+                ["-"] = new Operator { Name = "-", Priority = 1 },
+                ["*"] = new Operator { Name = "*", Priority = 2 },
+                ["/"] = new Operator { Name = "/", Priority = 2 },
+                ["^"] = new Operator { Name = "/", Priority = 3, RightAssociative = true }
+            };
 
-                token.Append(ch);
+            private bool CompareOperators(Operator op1, Operator op2)
+            {
+                return op1.RightAssociative ? op1.Priority < op2.Priority : op1.Priority <= op2.Priority;
+            }
 
-                var next = reader.Peek();
-                var nextType = next != -1 ? DetermineType((char)next) : TokenType.WhiteSpace;
-                if (currentType != nextType)
+            private bool CompareOperators(string op1, string op2) => CompareOperators(operators[op1], operators[op2]);
+
+            private TokenType DetermineType(char ch)
+            {
+                if (char.IsLetter(ch))
+                    return TokenType.Variable;
+                if (char.IsDigit(ch))
+                    return TokenType.Number;
+                if (char.IsWhiteSpace(ch))
+                    return TokenType.WhiteSpace;
+                if (ch == ',')
+                    return TokenType.Comma;
+                if (ch == '(' || ch == ')')
+                    return TokenType.Parenthesis;
+                if (operators.ContainsKey(Convert.ToString(ch)))
+                    return TokenType.Operator;
+
+                throw new Exception("Wrong character");
+            }
+
+            public IEnumerable<Token> Tokenize(TextReader reader)
+            {
+                var token = new StringBuilder();
+
+                int current;
+                while ((current = reader.Read()) != -1)
                 {
-                    if (next == '(')
-                        yield return new Token(TokenType.Function, token.ToString());
-                    else
-                        yield return new Token(currentType, token.ToString());
-                    token.Clear();
+                    var ch = (char)current;
+                    var currentType = DetermineType(ch);
+                    if (currentType == TokenType.WhiteSpace)
+                        continue;
+
+                    token.Append(ch);
+
+                    var next = reader.Peek();
+                    var nextType = next != -1 ? DetermineType((char)next) : TokenType.WhiteSpace;
+                    if (currentType != nextType)
+                    {
+                        if (next == '(')
+                            yield return new Token(TokenType.Function, token.ToString());
+                        else
+                            yield return new Token(currentType, token.ToString());
+                        token.Clear();
+                    }
                 }
             }
-        }
 
-        public IEnumerable<Token> ShuntingYard(IEnumerable<Token> tokens)
-        {
-            var stack = new Stack<Token>();
+            public IEnumerable<Token> ShuntingYard(IEnumerable<Token> tokens)
+            {
+                var stack = new Stack<Token>();
                 foreach (var tok in tokens)
                 {
                     switch (tok.Type)
@@ -98,18 +99,22 @@ namespace ScrumLearning
                         case TokenType.Variable:
                             yield return tok;
                             break;
+
                         case TokenType.Function:
                             stack.Push(tok);
                             break;
+
                         case TokenType.Comma:
                             while (stack.Peek().Value != "(")
                                 yield return stack.Pop();
                             break;
+
                         case TokenType.Operator:
                             while (stack.Any() && stack.Peek().Type == TokenType.Operator && CompareOperators(tok.Value, stack.Peek().Value))
                                 yield return stack.Pop();
                             stack.Push(tok);
                             break;
+
                         case TokenType.Parenthesis:
                             if (tok.Value == "(")
                                 stack.Push(tok);
@@ -122,6 +127,7 @@ namespace ScrumLearning
                                     yield return stack.Pop();
                             }
                             break;
+
                         default:
                             throw new Exception("Wrong token");
                     }

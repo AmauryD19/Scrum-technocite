@@ -1,21 +1,15 @@
-﻿using Renci.SshNet.Messages.Connection;
-using Renci.SshNet.Security.Cryptography;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ScrumLearning
 {
     public class Admin
     {
         public static bool isConnected = false;
+
         public static void CreateAdmin()
         {
         Start:
@@ -55,7 +49,6 @@ namespace ScrumLearning
             Console.WriteLine("Le mot de passe a été crypté et enregistré. Vous êtes à présent connecté.");
             isConnected = true;
             Console.ReadKey();
-
         }
 
         public static string MenuAdmin()
@@ -78,13 +71,13 @@ namespace ScrumLearning
 
         public static string ComputeSha256Hash(string rawData)
         {
-            // Create a SHA256   
+            // Create a SHA256
             using (SHA256 sha256Hash = SHA256.Create())
             {
-                // ComputeHash - returns byte array  
+                // ComputeHash - returns byte array
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
 
-                // Convert byte array to a string   
+                // Convert byte array to a string
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < bytes.Length; i++)
                 {
@@ -126,7 +119,6 @@ namespace ScrumLearning
                         isOk = false;
                         break;
                     }
-
                 }
 
                 if (!isOk)
@@ -184,7 +176,6 @@ namespace ScrumLearning
                 ErrorMessage = "Le mot de passe doit contenir au moins un chiffre.";
                 return false;
             }
-
             else if (!hasSymbols.IsMatch(input))
             {
                 ErrorMessage = "Le mot de passe doit contenir au moins un caractère spécial.";
