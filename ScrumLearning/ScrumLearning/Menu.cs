@@ -23,6 +23,7 @@ namespace ScrumLearning
         public void ShowMenu(MenuType menuType, bool clearConsole, int max)
         {
             if (clearConsole) Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
 
             foreach (var item in Items)
             {
@@ -77,6 +78,11 @@ namespace ScrumLearning
                         }
                         RefreshItemsMainMenu();
                         ShowMenu(MenuType.MainMenu, true, 0);
+                        break;
+                    case 7:
+                        PuissanceFour.Play();
+                        ShowMenu(MenuType.MainMenu, true, 0);
+                        break;
                         break;
 
                     default: break;

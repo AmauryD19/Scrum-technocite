@@ -51,17 +51,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin.cs" />
+    <Compile Include="BoardPuissance4.cs" />
     <Compile Include="CalculatorParser.cs" />
     <Compile Include="CalculatorStringParser.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DeseJson.cs" />
+    <Compile Include="DisplayPuissance4.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Operator.cs" />
     <Compile Include="Opinion.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Meteo.cs" />
+    <Compile Include="PlayerPuissance4.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PuissanceFour.cs" />
     <Compile Include="SerializationOpinion.cs" />
   </ItemGroup>
   <ItemGroup>
