@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 public enum MenuType { MainMenu, ConsultOpinion }
 
@@ -12,6 +13,11 @@ namespace ScrumLearning
         public Menu(List<string> items)
         {
             Items = items;
+        }
+
+        public void RefreshItemsMainMenu()
+        {
+            Items = new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM, Admin.MenuAdmin() };
         }
 
         public void ShowMenu(MenuType menuType, bool clearConsole, int max)
@@ -51,6 +57,23 @@ namespace ScrumLearning
                     case 5:
                         Environment.Exit(0);
                         break;
+                    case 6:
+
+                        if (!File.Exists("admin.txt"))
+                        {
+                            Admin.CreateAdmin();
+                        }
+                        else if (!Admin.isConnected)
+                        {
+                            Admin.LogIn();
+                        }
+                        else if (Admin.isConnected)
+                        {
+                            Admin.LogOut();
+                        }
+                        RefreshItemsMainMenu();
+                        ShowMenu(MenuType.MainMenu, true, 0);
+                        break;
 
                     default: break;
                 }
@@ -69,7 +92,7 @@ namespace ScrumLearning
                         break;
 
                     case 3:
-                        Items = new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM };
+                        RefreshItemsMainMenu();
                         ShowMenu(MenuType.MainMenu, true, max);
                         break;
 

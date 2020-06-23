@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace ScrumLearning
 {
@@ -14,8 +15,9 @@ namespace ScrumLearning
         /// </summary>
         public static void MainMenu()
         {
-            Menu menu = new Menu(new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM });
+            Menu menu = new Menu(new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM, Admin.MenuAdmin()});
             menu.ShowMenu(MenuType.MainMenu, true, 0);
+            //D@ssonville123456
         }
     }
 }
