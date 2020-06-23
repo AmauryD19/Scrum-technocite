@@ -17,7 +17,7 @@ namespace ScrumLearning
 
         public void RefreshItemsMainMenu()
         {
-            Items = new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM, Admin.MenuAdmin() };
+            Items = new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM, Admin.MenuAdmin(), Constants.TIMER_ITEM };
         }
 
         public void ShowMenu(MenuType menuType, bool clearConsole, int max)
@@ -78,7 +78,7 @@ namespace ScrumLearning
                         RefreshItemsMainMenu();
                         ShowMenu(MenuType.MainMenu, true, 0);
                         break;
-
+                    case 7: Timer.TimerMethod(); ShowMenu(MenuType.MainMenu, true, 0); break;
                     default: break;
                 }
             }
