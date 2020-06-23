@@ -17,5 +17,7 @@
         public const string LOG_OUT_ADMIN_ITEM = "Se déconnecter de l'administrateur";
         public const string PUISSANCE_4_ITEM = "Jouer au Puissance 4";
         public const string TIMER_ITEM = "Timer";
+        public const string CHANGE_COLORBG_ITEM = "Changer la couleur de fond";
+        public const string CHANGE_COLORTXT_ITEM = "Changer la couleur du texte";
     }
 }
