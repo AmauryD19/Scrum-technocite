@@ -25,7 +25,7 @@ namespace ScrumLearning
         public void RefreshItemsMainMenu()
         {
 
-            Items = new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM, Admin.MenuAdmin() };
+            Items = new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM, Admin.MenuAdmin(), Constants.PUISSANCE_4_ITEM, Constants.TIMER_ITEM };
             if (Admin.isConnected)
             {
                 Items.Add(Constants.CHANGE_COLORBG_ITEM);
@@ -131,11 +131,17 @@ namespace ScrumLearning
                         RefreshItemsMainMenu();
                         ShowMenu(MenuType.MainMenu, true, 0);
                         break;
-                    case 7:
+                    case 7: PuissanceFour.Play();
+                        ShowMenu(MenuType.MainMenu, true, 0);
+                        break;
+                    case 8: Timer.TimerMethod();
+                        ShowMenu(MenuType.MainMenu, true, 0);
+                        break; 
+                    case 9:
                         ChangeColor();
                         ShowMenu(MenuType.MainMenu, true, 0);
                         break;
-                    case 8:
+                    case 10:
                         ChangeColorTXT();
                         ShowMenu(MenuType.MainMenu, true, 0);
                         break;

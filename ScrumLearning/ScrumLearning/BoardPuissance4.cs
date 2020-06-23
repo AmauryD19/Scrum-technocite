@@ -13,8 +13,8 @@ namespace ScrumLearning
         {
             Console.Clear();
             Console.WriteLine("La partie commence !\n");
-            Menu men = new Menu(new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM, Admin.MenuAdmin(), Constants.PUISSANCE_4_ITEM });
-
+            Menu men = new Menu(new List<string> { Constants.NEW_OPINION_ITEM, Constants.CONSULT_DELETE_OPINION_ITEM, Constants.METEO_BXL_ITEM, Constants.CALCULATOR_ITEM, Constants.SAVE_QUIT_ITEM, Admin.MenuAdmin(), Constants.PUISSANCE_4_ITEM, Constants.TIMER_ITEM },MenuType.MainMenu);
+            men.RefreshItemsMainMenu();
             DisplayPuissance4.DisplayBoard(board);
             while (turn < 42)
             {
